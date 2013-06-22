@@ -3,7 +3,6 @@ package com.amazon.ml;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,17 +13,18 @@ import java.util.Set;
 public class DataSetParser {
     public static void main(String[] args) throws IOException {
         String filename = "/Users/charlie/Downloads/kindle-education-xray/kindle-education-xray/klo-dataset-train.txt";
+        //String filename = "/tmp/bobbob";
         
-        List<Two<Map<String, Integer>>> freqs = parseDocument(filename, 10);
+        List<Case> freqs = parseDocument(filename, 100);
         
-        for (Two<Map<String, Integer>> docPair: freqs) {
+        for (Case docPair: freqs) {
             System.out.println("DOC PAIR:");
             
             System.out.println("DOC #1");
-            showMap(docPair.fst);
+            showMap(docPair.bookFreqs);
             
             System.out.println("DOC #2");
-            showMap(docPair.snd);
+            showMap(docPair.wikiFreqs);
         }
     }
     
@@ -40,52 +40,28 @@ public class DataSetParser {
         }
     }
 
-    public enum Fields {
-        ASIN, GUID, TERM, BOOK_CONTEXT, WIKI_SUMMARY,
-        WIKI_TITLE, WIKI_QUERY_STRING, WORD_OVERLAP_SCORE,
-        CLASSIFICATION;
-    }
-    
-    public static List<Two<Map<String, Integer>>> parseDocument(String filename, int n) throws IOException {
-        List<Two<Map<String, Integer>>> frequencies = new LinkedList<Two<Map<String, Integer>>>();
+    public static List<Case> parseDocument(String filename, int n) throws IOException {
+        List<Case> cases = new LinkedList<Case>();
         String currentLine;
         int i = 0;
         
         BufferedReader reader = new BufferedReader(new FileReader(filename));
         
         while ((currentLine = reader.readLine()) != null && i < n) {
-            frequencies.add(parseLine(currentLine));
+            cases.add(parseLine(currentLine));
             i++;
         }
         
         reader.close();
         
-        return frequencies;
+        return cases;
     }
 
-    private static Two<Map<String, Integer>> parseLine(String currentLine) {
+    private static Case parseLine(String currentLine) {
         String[] fields = currentLine.split(",");
-        Map<String, Integer> book = parseDoc(fields[Fields.BOOK_CONTEXT.ordinal()]);
-        Map<String, Integer> wiki = parseDoc(fields[Fields.BOOK_CONTEXT.ordinal()]);
         
-        return new Two<Map<String, Integer>>(book, wiki);
+        return new Case(fields[0], fields[1], fields[2], fields[3], fields[4],
+                fields[5], fields[6], Integer.parseInt(fields[7]), Integer.parseInt(fields[8]));
     }
 
-    private static Map<String, Integer> parseDoc(String text) {
-        String[] words = text.split("[ -_.,;\"'!?]+");
-        Map<String, Integer> freq = new HashMap<String, Integer>();
-        
-        for (String word: words) {
-            if (word.equals(""))
-                continue;
-            
-            Integer n = freq.get(word);
-            
-            if (n == null) { n = 0; }
-            
-            freq.put(word, n+1);
-        }
-        
-        return freq;
-    }
 }
