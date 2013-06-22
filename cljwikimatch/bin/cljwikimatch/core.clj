@@ -19,7 +19,7 @@
 ; takes a vector with the elems and makes numbers and removes quotes
 (defn tidyRow [row]
   (let [[asin guid t booktxt wikisum wikititle wikiquery overlap class] row]
-    {:asin asin :guid guid  :wtf "loL" :booktxt (noends booktxt)
+    {:asin asin :guid guid  :term (noends t) :booktxt (noends booktxt)
      :wikisum (noends wikisum) :wikititle (noends wikititle)
      :wikiquery (noends wikiquery) :overlap (java.lang.Integer/parseInt overlap)
      :class (java.lang.Integer/parseInt class)})
@@ -35,7 +35,11 @@
  (println "uploading to mongo" mgcoll mgdbname) 
   (with-open [rdr (reader file)]
   (doseq [line (line-seq rdr)]
+    (try 
     (mc/insert mgcoll (parseLine line))
+    (catch Exception e ())
+    )
+;    (println line)
     ))
  )
 
