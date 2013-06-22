@@ -47,7 +47,7 @@ public class DataSetParser {
     }
     
     public static List<Two<Map<String, Integer>>> parseDocument(String filename, int n) throws IOException {
-        List<Two<Map<String, Integer>>> frequencies = new LinkedList<>();
+        List<Two<Map<String, Integer>>> frequencies = new LinkedList<Two<Map<String, Integer>>>();
         String currentLine;
         int i = 0;
         
@@ -68,12 +68,12 @@ public class DataSetParser {
         Map<String, Integer> book = parseDoc(fields[Fields.BOOK_CONTEXT.ordinal()]);
         Map<String, Integer> wiki = parseDoc(fields[Fields.BOOK_CONTEXT.ordinal()]);
         
-        return new Two<>(book, wiki);
+        return new Two<Map<String, Integer>>(book, wiki);
     }
 
     private static Map<String, Integer> parseDoc(String text) {
         String[] words = text.split("[ -_.,;\"'!?]+");
-        Map<String, Integer> freq = new HashMap<>();
+        Map<String, Integer> freq = new HashMap<String, Integer>();
         
         for (String word: words) {
             if (word.equals(""))
