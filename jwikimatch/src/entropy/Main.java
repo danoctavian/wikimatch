@@ -23,10 +23,7 @@ public class Main {
 		corpusProbabilityMap.put("this", 0.125);
 		corpusProbabilityMap.put("sun", 0.125);
 		
-		final Double entropy = comparator.calculateEntropy(intersectedMap, corpusProbabilityMap);
-		System.out.println("Entropy: " + entropy);
-		System.out.println();
-		
+				
 		System.out.println("Context freq map:");
 		for(String word : contextFreqMap.keySet()) {
 			System.out.println(word + " : " + contextFreqMap.get(word));
