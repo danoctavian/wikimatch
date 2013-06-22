@@ -28,7 +28,7 @@ public class DataSetParser {
         }
     }
     
-    private static void showMap(Map<String, Integer> freqs) {
+    public static void showMap(Map<String, Integer> freqs) {
         Set<Entry<String, Integer>> entries = freqs.entrySet();
         
         Iterator<Entry<String, Integer>> it = entries.iterator();

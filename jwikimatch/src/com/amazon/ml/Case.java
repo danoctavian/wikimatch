@@ -35,10 +35,11 @@ public class Case {
     }
 
     private static Map<String, Integer> parseDoc(String text) {
-        String[] words = text.split("[ -_.,;\"'!?]+");
+        String[] words = text.split("[\\s\\-\\.\"',;?!]+");
         Map<String, Integer> freq = new HashMap<String, Integer>();
         
         for (String word: words) {
+            word = word.toLowerCase();
             if (word.equals(""))
                 continue;
             
