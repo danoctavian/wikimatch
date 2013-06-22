@@ -3,6 +3,7 @@ package com.amazon.ml;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,10 +11,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import entropy.EntropyComparator;
+
 public class DataSetParser {
     public static void main(String[] args) throws IOException {
-        String filename = "/Users/charlie/Downloads/kindle-education-xray/kindle-education-xray/klo-dataset-train.txt";
-        //String filename = "/tmp/bobbob";
+        String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/entropy/input_example.txt";
         
         List<Case> freqs = parseDocument(filename, 100);
         
@@ -25,6 +27,21 @@ public class DataSetParser {
             
             System.out.println("DOC #2");
             showMap(docPair.wikiFreqs);
+            
+            final EntropyComparator comparator = new EntropyComparator();
+    		final Map<String, Integer> intersectedMap = comparator.intersectMaps(docPair.bookFreqs, docPair.wikiFreqs);
+    		
+    		final Map<String, Double> corpusProbabilityMap = new HashMap<String, Double>();
+    		corpusProbabilityMap.put("digital", 0.25);
+    		corpusProbabilityMap.put("computer", 0.125);
+    		corpusProbabilityMap.put("electrical", 0.125);
+    		corpusProbabilityMap.put("puppy", 0.25);
+    		corpusProbabilityMap.put("and", 0.125);
+    		corpusProbabilityMap.put("that", 0.125);
+    		
+    		final Double entropy = comparator.calculateEntropy(intersectedMap, corpusProbabilityMap);
+    		System.out.println("Entropy: " + entropy);
+    		System.out.println();
         }
     }
     
