@@ -53,7 +53,7 @@
 
 (defn -main []
   (println "print 1 to load files to mongodb")
-  (uploadToMongo "/home/dan/data/kindle-education-xray/klo-dataset-train.txt" mgtraincoll)
+  (uploadToMongo "/home/dan/data/kindle-education-xray/klo-100.txt" "smallData")
 ;  (runUserUpload)
 ;    (let [input (read-line)]
 ;      (case input "1" (runUserUpload) "default" (println "fuck off now")))  
