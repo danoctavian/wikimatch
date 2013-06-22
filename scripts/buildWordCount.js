@@ -1,11 +1,10 @@
-
 db.train.mapReduce(
 function() {
  function mapw(o) {
   function getWords(txt) {
     var words = txt.split(new RegExp("\\s+"))
     return words.map(function(w) {
-      return w.toLowerCase().replace(/'s/g, "").replace(/[^a-zA-Z]/g, "    ")
+      return w.toLowerCase().replace(/'s/g, "").replace(/[^a-zA-Z]/g, "")
     })
   }
   var ws1 = getWords(o.booktxt)
@@ -16,7 +15,7 @@ function() {
 
 
 
-  mapw(this).forEach(function(w) {emit(w, 1)})
+  mapw(this).forEach(function(w) { if (w !== "") {emit(w, 1)}})
 },
 function(k, vs) {
   var s = 0
