@@ -39,5 +39,9 @@ public class Main {
 		for(String word : intersectedMap.keySet()) {
 			System.out.println(word + " : " + intersectedMap.get(word));
 		}
+		
+		
+		
+		
 	}
 }

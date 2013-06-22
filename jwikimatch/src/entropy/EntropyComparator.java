@@ -34,7 +34,7 @@ public class EntropyComparator {
 		Double result = 0.0;
 		for(final String word : commonFrequenciesMap.keySet()) {
 			final Double probability = corpusProbabilityMap.get(word);
-			if(probability!=null) {
+			if(probability!=null && probability>0.0000001) {
 				result+=(-commonFrequenciesMap.get(word)*probability*Math.log(probability));
 			}
 		}
