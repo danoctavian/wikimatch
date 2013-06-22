@@ -1,0 +1,2 @@
+how to run a script
+mongo <dan_ip>:27017/wikimatch <yourfavouritescript>.js
