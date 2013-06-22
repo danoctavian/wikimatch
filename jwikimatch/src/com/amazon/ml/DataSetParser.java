@@ -11,15 +11,25 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
+
 import entropy.EntropyComparator;
 
 public class DataSetParser {
     public static void main(String[] args) throws IOException {
-        String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/entropy/input_example.txt";
-        
+    	
+        //String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/unrelated_example.txt";
+        String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/unrelated_example2.txt";
+        //String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/input_example.txt";
+        //String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/input_example2.txt";
+
         List<Case> freqs = parseDocument(filename, 100);
         
-        for (Case docPair: freqs) {
+        for (Case docPair : freqs) {
             System.out.println("DOC PAIR:");
             
             System.out.println("DOC #1");
@@ -39,12 +49,13 @@ public class DataSetParser {
     		corpusProbabilityMap.put("and", 0.125);
     		corpusProbabilityMap.put("that", 0.125);
     		
-    		final Double entropy = comparator.calculateEntropy(intersectedMap, corpusProbabilityMap);
+    		final Double entropy = comparator.calculateEntropy(intersectedMap);
     		System.out.println("Entropy: " + entropy);
     		System.out.println();
         }
+        
     }
-    
+   
     public static void showMap(Map<String, Integer> freqs) {
         Set<Entry<String, Integer>> entries = freqs.entrySet();
         
@@ -80,5 +91,4 @@ public class DataSetParser {
         return new Case(fields[0], fields[1], fields[2], fields[3], fields[4],
                 fields[5], fields[6], Integer.parseInt(fields[7]), Integer.parseInt(fields[8]));
     }
-
 }
