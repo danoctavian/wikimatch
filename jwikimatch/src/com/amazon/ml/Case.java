@@ -39,7 +39,7 @@ public class Case {
         Map<String, Integer> freq = new HashMap<String, Integer>();
         
         for (String word: words) {
-            word = word.toLowerCase();
+            word = word.toLowerCase().replaceAll("/'s/g", "").replaceAll("/[^a-zA-Z]/g", "");
             if (word.equals(""))
                 continue;
             
