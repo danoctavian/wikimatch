@@ -7,4 +7,10 @@ public class TreshCase {
 		this.tresh = tresh;
 		this.cls = cls;
 	}
+
+	@Override
+	public String toString() {
+		return "tresh: " + tresh + " Cls: " + cls;
+		
+	}
 }
