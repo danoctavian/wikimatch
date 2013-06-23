@@ -3,51 +3,35 @@ package com.amazon.ml;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.MongoClient;
-
 import entropy.EntropyComparator;
 
 public class DataSetParser {
     public static void main(String[] args) throws IOException {
     	
         //String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/unrelated_example.txt";
-        String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/unrelated_example2.txt";
+        String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/medium_related_example.txt";
         //String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/input_example.txt";
         //String filename = "/Volumes/HFS-AGA/Programming/wikimatch/jwikimatch/src/resources/input_example2.txt";
 
         List<Case> freqs = parseDocument(filename, 100);
         
         for (Case docPair : freqs) {
-            System.out.println("DOC PAIR:");
+            //System.out.println("DOC PAIR:");
             
-            System.out.println("DOC #1");
-            showMap(docPair.bookFreqs);
+            //System.out.println("DOC #1");
+            //showMap(docPair.bookFreqs);
             
-            System.out.println("DOC #2");
-            showMap(docPair.wikiFreqs);
+            //System.out.println("DOC #2");
+            //showMap(docPair.wikiFreqs);
             
             final EntropyComparator comparator = new EntropyComparator();
     		final Map<String, Integer> intersectedMap = comparator.intersectMaps(docPair.bookFreqs, docPair.wikiFreqs);
-    		
-    		final Map<String, Double> corpusProbabilityMap = new HashMap<String, Double>();
-    		corpusProbabilityMap.put("digital", 0.25);
-    		corpusProbabilityMap.put("computer", 0.125);
-    		corpusProbabilityMap.put("electrical", 0.125);
-    		corpusProbabilityMap.put("puppy", 0.25);
-    		corpusProbabilityMap.put("and", 0.125);
-    		corpusProbabilityMap.put("that", 0.125);
     		
     		final Double entropy = comparator.calculateEntropy(intersectedMap);
     		System.out.println("Entropy: " + entropy);
