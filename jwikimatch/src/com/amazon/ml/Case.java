@@ -59,7 +59,6 @@ public class Case {
             Integer n = freq.get(word);
             
             if (n == null) { n = 0; }
-            
             freq.put(word, n+1);
         }
         return freq;
