@@ -24,11 +24,11 @@ public class DataSetParser {
         for (Case docPair : freqs) {
             //System.out.println("DOC PAIR:");
            
-            //System.out.println("DOC #1");
-            //showMap(docPair.bookFreqs);
+            System.out.println("DOC #1");
+            showMap(docPair.bookFreqs);
             
-            //System.out.println("DOC #2");
-            //showMap(docPair.wikiFreqs);
+            System.out.println("DOC #2");
+            showMap(docPair.wikiFreqs);
             
             final EntropyComparator comparator = new EntropyComparator();
     		final Map<String, Integer> intersectedMap = comparator.intersectMaps(docPair.bookFreqs, docPair.wikiFreqs);
