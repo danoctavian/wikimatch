@@ -6,21 +6,26 @@ import scala.collection.mutable.MutableList
 import scala.collection.mutable.LinkedList
 import scala.collection.mutable.ArrayBuffer
 import java.util.ArrayList
+import scala.util.Random
+import java.util.LinkedList
 
 /* bucket sort based on doubles with values in range 0 - 1 */
 class BucketList(decs : Int) {
 
   var bucks : ArrayList[ArrayList[TreshCase]] = null 
   var mult : Int = 1
+  
   /* decs -number of decimals therefore of buckets */
-  def create(cases : List[TreshCase])  = {
+  def create(cases : java.util.List[TreshCase])  = {
     var d :Int = Math.min(5, decs)
     mult = Math.pow(10.0, decs.toDouble).toInt
     bucks = new ArrayList(mult)
-    
 		for (i <- 0 until mult) {
 			bucks.add(new ArrayList())
 		}
+    
+ //   a = new ArrayList() 
+//cases.foreach(c => { insert(c)})
 		cases.foreach(c => { insert(c)})
   }
 
@@ -52,11 +57,10 @@ object ThresholdFinder {
 	}
 	
 	type Tresh = Double
-	def find(cases : List[TreshCase], decs: Int): Tresh = {
+	def find(cases : java.util.List[TreshCase], decs: Int): Tresh = {
 	  	var buck = new BucketList(decs)
 	  	buck.create(cases)
 
-	  	var p = Math.pow(10, decs)
 	  	var bestTresh : Double = 0
 	  	var bestScore = 0
 	  	var tresh : Double = 0
@@ -81,10 +85,26 @@ object ThresholdFinder {
 	  	})
 	  	bestTresh
 	}
+
+	def testFinderPerf(count : Int, decs : Int) {
+	  var li : java.util.ArrayList[TreshCase] = new java.util.ArrayList()
+  	var p = Math.pow(10, decs).toInt
+	  for (i <- 1 until count) {
+	  	var r = Random.nextInt(p).toDouble / p.toDouble
+	  	var c = Random.nextInt(2)
+//	  	println(r + " " + c)
+	  	li.add(new TreshCase(r, c))
+	  }
+	  var start = java.lang.System.currentTimeMillis()
+		var t = find(li, decs)
+		var end = java.lang.System.currentTimeMillis()
+		println ("TIME " + (end - start))
+	  println(t)
+	}
 	
 	def main(args : Array[String]) {
-//		println("decs fixed" + fixDecs(0.234, 100))
-//	  return
+		testFinderPerf(1000000, 6)
+    return
 		var bl : BucketList = new BucketList(1)
 		var li : List[TreshCase] = List(new TreshCase(0.2, 1),
 		    new TreshCase(0.7, 1),

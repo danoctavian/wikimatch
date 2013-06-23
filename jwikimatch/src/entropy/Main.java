@@ -22,7 +22,6 @@ public class Main {
 		corpusProbabilityMap.put("puppy", 0.25);
 		corpusProbabilityMap.put("this", 0.125);
 		corpusProbabilityMap.put("sun", 0.125);
-		
 				
 		System.out.println("Context freq map:");
 		for(String word : contextFreqMap.keySet()) {
@@ -36,9 +35,5 @@ public class Main {
 		for(String word : intersectedMap.keySet()) {
 			System.out.println(word + " : " + intersectedMap.get(word));
 		}
-		
-		
-		
-		
 	}
 }

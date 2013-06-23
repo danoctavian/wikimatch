@@ -3,6 +3,8 @@ package com.amazon.ml;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mongodb.DBObject;
+
 public class Case {
     public final String asin;
     public final String guid;
@@ -42,7 +44,6 @@ public class Case {
             word = word.toLowerCase().replaceAll("'s", "").replaceAll("[^a-zA-Z]", "");
             if (word.equals(""))
                 continue;
-            
             Integer n = freq.get(word);
             
             if (n == null) { n = 0; }
@@ -53,4 +54,12 @@ public class Case {
         return freq;
     }
 
+   public static Case mongoObjToCase(DBObject obj) {
+  	 return new Case((String) obj.get("asin"), (String) obj.get("guid"),
+  			 (String) obj.get("term"), (String) obj.get("booktxt"),
+  			 (String) obj.get("wikisum"),
+  			 (String) obj.get("wikititle"),
+  			 (String) obj.get("wikiquery"),
+  			 (Integer) obj.get("overlap"), (Integer) obj.get("class"));
+   }
 }
