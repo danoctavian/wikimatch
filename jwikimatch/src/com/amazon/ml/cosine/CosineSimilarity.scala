@@ -3,6 +3,8 @@ package com.amazon.ml.cosine
 import scala.collection.JavaConversions._
 import com.amazon.ml.DataSetParser
 import com.mongodb.DBCollection
+import com.amazon.ml.ThreshCase
+import com.amazon.ml.ThresholdFinder
 
 object CosineSimilarity {
   def similarity(a: Map[String, Int], b: Map[String, Int], wc: DBCollection): Double = {
@@ -27,17 +29,23 @@ object CosineSimilarity {
   def main(args: Array[String]) {
     val startTime = System.currentTimeMillis()
     val freqs = DataSetParser.parseDocument("/Users/charlie/Downloads/kindle-education-xray/kindle-education-xray/klo-dataset-train.txt", 1000)
+    var treshCases = List[ThreshCase]()
     val wc = TfIdf.getWC("192.168.1.12")
 
     freqs.foreach { c =>
-      println("For " + c.asin + ", " + c.term)
+    //  println("For " + c.asin + ", " + c.term)
   
       val a = toScalaMap(c.bookFreqs)
       val b = toScalaMap(c.wikiFreqs)
       
-      println(c.classification + " : " + similarity(a, b, wc))
+      treshCases = new ThreshCase(similarity(a, b, wc), c.classification) :: treshCases
+      
+    //  println(c.classification + " : " + similarity(a, b, wc))
     }
     
+    val threshold = ThresholdFinder.find(treshCases, 7)
+    
+    println("Threshold = " + threshold)
     println("Total time = " + (System.currentTimeMillis() - startTime) / 1000)
   }
 }
