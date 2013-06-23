@@ -49,7 +49,7 @@ public class Case {
     }
 
     private static Map<String, Integer> parseDoc(String text) {
-        String[] words = text.split("[\\s\\-\\.\"',;?!_]+");
+        String[] words = text.split("[\\s\\-\\.\"',;:?!_]+");
         Map<String, Integer> freq = new HashMap<String, Integer>();
         
         for (String word: words) {
