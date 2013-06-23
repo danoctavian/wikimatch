@@ -11,7 +11,7 @@ import com.mongodb.MongoClient;
 
 
 public class EntropyComparator {
-	final int totalCount = 108458673;
+	public final static int totalCount = 108458673;
 	private DBCollection wc;
 	
 	public EntropyComparator() throws UnknownHostException {
