@@ -1,6 +1,6 @@
 package com.amazon.ml;
 
-public class ThreshCase {
+public class ThreshCase implements Comparable<ThreshCase> {
 	public double thresh; 
 	public int cls;
 	public ThreshCase(double tresh, int cls) {
@@ -13,4 +13,8 @@ public class ThreshCase {
 		return "tresh: " + thresh + " Cls: " + cls;
 		
 	}
+
+  public int compareTo(ThreshCase o) {
+  	return new Double(this.thresh).compareTo(new Double(o.thresh));
+  }
 }
