@@ -59,6 +59,9 @@ public class EntropyComparator {
 				probability = count/totalCount;
 			}
 			if(probability!=null && probability>0.0000001) {
+			  //System.out.println("Frequency of " + word + " : " + commonFrequenciesMap.get(word));
+			  //System.out.println("Probability of " + word + " : " + probability);
+			  //System.out.println("Result for " + word + " : " + -commonFrequenciesMap.get(word)*probability*Math.log(probability));
 				result+=(-commonFrequenciesMap.get(word)*probability*Math.log(probability));
 			}
 		}
