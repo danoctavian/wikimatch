@@ -1,5 +1,4 @@
 package entropy;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -15,14 +14,6 @@ public class Main {
 		final EntropyComparator comparator = new EntropyComparator();
 		final Map<String, Integer> intersectedMap = comparator.intersectMaps(contextFreqMap, wikiFreqMap);
 		
-		final Map<String, Double> corpusProbabilityMap = new HashMap<String, Double>();
-		corpusProbabilityMap.put("hello", 0.25);
-		corpusProbabilityMap.put("puppies", 0.125);
-		corpusProbabilityMap.put("sunny", 0.125);
-		corpusProbabilityMap.put("puppy", 0.25);
-		corpusProbabilityMap.put("this", 0.125);
-		corpusProbabilityMap.put("sun", 0.125);
-				
 		System.out.println("Context freq map:");
 		for(String word : contextFreqMap.keySet()) {
 			System.out.println(word + " : " + contextFreqMap.get(word));
