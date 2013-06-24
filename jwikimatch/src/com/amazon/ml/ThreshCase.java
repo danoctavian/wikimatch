@@ -11,7 +11,6 @@ public class ThreshCase implements Comparable<ThreshCase> {
 	@Override
 	public String toString() {
 		return "tresh: " + thresh + " Cls: " + cls;
-		
 	}
 
   public int compareTo(ThreshCase o) {

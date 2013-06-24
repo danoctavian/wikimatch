@@ -1,0 +1,15 @@
+2000 examples in test set
+
+with n grams
+small training 400
+Cls 0: TP=754 FN=246 FP=526 TN=474; Acc 0.614 P 0.589 R 0.754 F1 0.661
+Cls 1: TP=474 FN=526 FP=246 TN=754; Acc 0.614 P 0.658 R 0.474 F1 0.551
+
+big training: 2000
+Cls 0: TP=753 FN=247 FP=665 TN=335; Acc 0.544 P 0.531 R 0.753 F1 0.623
+Cls 1: TP=335 FN=665 FP=247 TN=753; Acc 0.544 P 0.576 R 0.335 F1 0.424
+
+with useString
+Cls 0: TP=150 FN=850 FP=19 TN=981; Acc 0.566 P 0.888 R 0.150 F1 0.257
+Cls 1: TP=981 FN=19 FP=850 TN=150; Acc 0.566 P 0.536 R 0.981 F1 0.693
+

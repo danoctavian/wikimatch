@@ -10,6 +10,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 
+import edu.stanford.nlp.classify.ColumnDataClassifier;
+
 public class SimilarityAnalysis {
 	
 	public static List<Case> getCases(int n) {
@@ -30,12 +32,8 @@ public class SimilarityAnalysis {
 	
 	public static void main(String[] args) throws IOException {
     long s = System.currentTimeMillis();
-//    List<Case> cs = getCases(100000);
-
-//		List<Case> cs = DataSetParser.parseDocument("/home/dan/data/kindle-education-xray/klo-dataset-train.txt", 200000);
 		System.out.println("done reading");
 		
-//		cs.iterator()
 		PerfMeasure perf = SimilarityMeasureEval.evalSimMeasure((SimMeasure)new OverlapSim(),
 					new MongoCasesIt("train"), 150000, 30000);
     long e = System.currentTimeMillis();
